@@ -36,10 +36,11 @@ window.SITE = {
   // About 下面的技能列表。label 是左边的类别名，items 是标签。
   skills: [
     { label: "Engines", items: ["Unreal Engine", "Unity", "UEFN", "FiveM", "Creation Kit (Skyrim)"] },
-    { label: "Engine tools", items: ["Dynamic Mesh", "Custom Gravity", "Behavior Trees", "ProBuilder", "Material Editor"] },
+    { label: "Engine tools", items: ["Dynamic Mesh", "Custom Gravity", "UMG", "Behavior Trees", "ProBuilder", "Material Editor"] },
     { label: "Programming", items: ["C++", "Blueprint", "C#", "Lua", "Java"] },
     { label: "Web & Data", items: ["HTML", "CSS", "JavaScript", "JSON", "SQL"] },
-    { label: "Design & Production", items: ["Scrum", "Jira", "Excel", "Miro", "Figma", "Twine"] },
+    { label: "Design methods", items: ["Playtesting", "Player interviews", "Gameplay telemetry", "Balancing", "Monte Carlo simulation"] },
+    { label: "Production", items: ["Scrum", "Jira", "Excel", "Miro", "Figma", "Twine"] },
     { label: "Dev tools", items: ["Git (GitHub Desktop)", "Visual Studio", "VS Code", "Rider"] },
     { label: "Art & Video", items: ["3ds Max", "Maya", "Blender", "ZBrush", "Substance 3D Painter", "Marmoset Toolbag", "Marvelous Designer", "SketchUp", "Photoshop", "Premiere Pro"] },
     { label: "Languages", items: ["Mandarin (native)", "English"] },
