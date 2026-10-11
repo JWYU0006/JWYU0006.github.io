@@ -54,7 +54,9 @@ function renderChrome(onHome) {
     ${hasMore ? `<a class="link" href="${base}#more">More Work</a>` : ""}
     <a class="link" href="${base}#about">About</a>
     ${S.resume ? `<a class="cv" href="${esc(S.resume)}" target="_blank" rel="noopener">Resume</a>` : ""}
+    <button class="theme-toggle" type="button" id="theme-toggle"></button>
   </div>`;
+  wireTheme();
 
   if (S.showDraftBanner) {
     document.getElementById("banner").innerHTML =
@@ -64,6 +66,35 @@ function renderChrome(onHome) {
   const year = new Date().getFullYear();
   document.getElementById("footer").innerHTML =
     `© ${year} ${esc(S.name)}${S.email ? ` · ${esc(S.email)}` : ""}`;
+}
+
+// Light / dark switch. The choice is remembered; otherwise the system setting is used.
+function currentTheme() {
+  return document.documentElement.dataset.theme ||
+    (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+}
+function wireTheme() {
+  const btn = document.getElementById("theme-toggle");
+  const paint = () => {
+    const dark = currentTheme() === "dark";
+    btn.textContent = dark ? "☀" : "☾";
+    btn.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+    btn.title = btn.getAttribute("aria-label");
+  };
+  btn.addEventListener("click", () => {
+    const next = currentTheme() === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch (e) {}
+    paint();
+  });
+  paint();
+}
+
+// Left "On this page" sidebar. Items: { id, label } or { group } for a small heading.
+function tocNav(items) {
+  return `<nav class="toc" aria-label="On this page"><h3>On this page</h3><ul>${items
+    .map((t) => (t.group ? `<li class="toc-group">${esc(t.group)}</li>` : `<li><a href="#${t.id}" data-toc="${t.id}">${esc(t.label)}</a></li>`))
+    .join("")}</ul></nav>`;
 }
 
 function contactButtons() {
@@ -118,8 +149,19 @@ function renderHome() {
       </section>`
     : "";
 
-  document.getElementById("home").innerHTML = `
-    <section class="hero">
+  const toc = [{ id: "top", label: "Intro" }];
+  (S.sections || []).forEach((s) => {
+    if (featured.some((p) => p.category === s.id)) toc.push({ id: s.id, label: s.nav || s.title });
+  });
+  if (more.length) toc.push({ id: "more", label: "More Work" });
+  toc.push({ id: "about", label: "About" });
+
+  const el = document.getElementById("home");
+  el.classList.add("has-side");
+  el.innerHTML = `
+    ${tocNav(toc)}
+    <div class="home-main">
+    <section class="hero" id="top">
       <div class="eyebrows">
         <span class="eyebrow">${esc(S.role)}</span>
         ${S.status ? `<span class="status">${esc(S.status)}</span>` : ""}
@@ -140,8 +182,11 @@ function renderHome() {
         .map((g) => `<div><dt>${esc(g.label)}</dt><dd>${(g.items || []).map((i) => `<span class="tag">${esc(i)}</span>`).join("")}</dd></div>`)
         .join("")}</dl>` : ""}
       <div style="margin-top:18px">${contactButtons()}</div>
-    </section>`;
+    </section>
+    </div>
+    <div class="side-spacer"></div>`;
   wire();
+  wireToc();
 }
 
 function youtube(id, title) {
@@ -288,9 +333,7 @@ function renderProject() {
     if (s.type === "divider") { if (s.label) toc.push({ group: s.label }); }
     else if (s.heading && SECTION[s.type]) toc.push({ id: `s-${i}`, label: s.heading });
   });
-  const tocHtml = `<nav class="toc" aria-label="On this page"><h3>On this page</h3><ul>${toc
-    .map((t) => (t.group ? `<li class="toc-group">${esc(t.group)}</li>` : `<li><a href="#${t.id}" data-toc="${t.id}">${esc(t.label)}</a></li>`))
-    .join("")}</ul></nav>`;
+  const tocHtml = tocNav(toc);
 
   // Prev / next within featured-or-more group to keep reviewers moving.
   const group = P.filter((x) => (x.featured === false) === (p.featured === false) && !x.link);
