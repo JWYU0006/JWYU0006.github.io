@@ -36,10 +36,13 @@ window.SITE = {
   // About 下面的技能列表。label 是左边的类别名，items 是标签。
   skills: [
     { label: "Engines", items: ["Unreal Engine", "Unity", "UEFN", "FiveM"] },
+    { label: "Engine tools", items: ["Behavior Trees", "ProBuilder", "Material Editor"] },
     { label: "Programming", items: ["C++", "Blueprint", "C#", "Lua", "Java"] },
     { label: "Web & Data", items: ["HTML", "CSS", "JavaScript", "SQL"] },
-    { label: "Production", items: ["Scrum", "Jira", "Excel", "Design documentation", "Rapid prototyping"] },
-    { label: "Art", items: ["3ds Max", "Maya", "Blender", "ZBrush", "Substance 3D Painter", "Marmoset Toolbag", "Photoshop"] },
+    { label: "Design & Production", items: ["Scrum", "Jira", "Excel", "Miro", "Figma", "Twine"] },
+    { label: "Dev tools", items: ["Git (GitHub Desktop)", "Visual Studio", "VS Code", "Rider"] },
+    { label: "Art & Video", items: ["3ds Max", "Maya", "Blender", "ZBrush", "Substance 3D Painter", "Marmoset Toolbag", "Marvelous Designer", "Photoshop", "Premiere Pro"] },
+    { label: "Languages", items: ["Mandarin (native)", "English"] },
   ],
 
   // 首页的分区，按这里的顺序显示。
