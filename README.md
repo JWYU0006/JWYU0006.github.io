@@ -34,7 +34,7 @@ python -m http.server 8000
 {
   id: "flooded-archive",          // 网址用的短名：小写字母、数字、横杠，不能重复
   title: "Flooded Archive",
-  category: "level",              // level / tech / code，对应 site.js 里的 sections
+  category: "level",              // game / level / code / art，对应 site.js 里的 sections
   featured: true,                 // false 表示放到 More Work
   summary: "一句话介绍，显示在卡片上和项目页标题下面",
   tags: ["UE5", "Solo", "6 weeks"],

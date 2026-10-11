@@ -61,8 +61,12 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; text-wra
 /* hero */
 .hero { padding-block: 56px 36px; display: grid; gap: 16px; }
 .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
-.hero h1 { font-size: clamp(32px, 5.4vw, 54px); max-width: 20ch; }
-.hero p { margin: 0; max-width: 62ch; color: var(--muted); font-size: 17px; }
+.eyebrows { display: grid; gap: 4px; }
+.status { font-size: 14px; color: var(--muted); }
+.hero h1 { font-size: clamp(32px, 5.4vw, 54px); max-width: 22ch; }
+.intro { display: grid; gap: 6px; max-width: 64ch; }
+.intro p { margin: 0; color: var(--muted); font-size: 17px; }
+.intro .school { color: var(--fg); font-weight: 600; }
 .links { display: flex; flex-wrap: wrap; gap: 10px; }
 .btn {
   display: inline-flex; align-items: center; gap: 6px;
@@ -102,6 +106,12 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; text-wra
 
 .about { display: grid; gap: 12px; max-width: 68ch; }
 .about p { margin: 0; }
+.skills { display: grid; gap: 10px; margin: 20px 0 0; max-width: 760px; }
+.skills div { display: grid; grid-template-columns: 120px 1fr; gap: 10px; align-items: baseline; }
+.skills dt { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.skills dd { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.skills .tag { font-size: 12px; color: var(--fg); }
+@media (max-width: 520px) { .skills div { grid-template-columns: 1fr; gap: 4px; } }
 
 .footer { padding-block: 28px 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); margin-top: 20px; }
 

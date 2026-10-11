@@ -35,7 +35,7 @@ function renderChrome(onHome) {
   const base = onHome ? "" : "index.html";
   const sectionLinks = (S.sections || [])
     .filter((s) => P.some((p) => p.featured !== false && p.category === s.id))
-    .map((s) => `<a class="link" href="${base}#${esc(s.id)}">${esc(s.title)}</a>`)
+    .map((s) => `<a class="link" href="${base}#${esc(s.id)}">${esc(s.nav || s.title)}</a>`)
     .join("");
   const hasMore = P.some((p) => p.featured === false);
   document.getElementById("nav").innerHTML = `<div class="wrap">
@@ -98,7 +98,7 @@ function renderHome() {
 
   const moreHtml = more.length
     ? `<section class="section" id="more">
-        <div class="section-head"><h2>More Work</h2><span>Smaller projects, jams and environment art</span></div>
+        <div class="section-head"><h2>More Work</h2><span>Game jams, coursework and smaller projects</span></div>
         <div class="more">${more
           .map((p) => {
             const target = isExternal(p) ? ` target="_blank" rel="noopener"` : "";
@@ -110,9 +110,15 @@ function renderHome() {
 
   document.getElementById("home").innerHTML = `
     <section class="hero">
-      <span class="eyebrow">${esc(S.role)}${S.status ? ` · ${esc(S.status)}` : ""}</span>
+      <div class="eyebrows">
+        <span class="eyebrow">${esc(S.role)}</span>
+        ${S.status ? `<span class="status">${esc(S.status)}</span>` : ""}
+      </div>
       <h1>${esc(S.headline)}</h1>
-      <p>${esc(S.intro)}</p>
+      <div class="intro">
+        ${S.school ? `<p class="school">${esc(S.school)}</p>` : ""}
+        <p>${esc(S.intro)}</p>
+      </div>
       ${contactButtons()}
     </section>
     ${sections}
@@ -120,6 +126,9 @@ function renderHome() {
     <section class="section" id="about">
       <div class="section-head"><h2>About</h2></div>
       <div class="about">${paras(S.about)}</div>
+      ${(S.skills || []).length ? `<dl class="skills">${S.skills
+        .map((g) => `<div><dt>${esc(g.label)}</dt><dd>${(g.items || []).map((i) => `<span class="tag">${esc(i)}</span>`).join("")}</dd></div>`)
+        .join("")}</dl>` : ""}
       <div style="margin-top:18px">${contactButtons()}</div>
     </section>`;
   wire();

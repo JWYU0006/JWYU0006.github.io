@@ -4,7 +4,7 @@
 //
 // 常用字段：
 //   id        网址里用的英文短名，只能用小写字母、数字和横杠，不能重复
-//   category  属于哪个分区：level / tech / code（对应 site.js 的 sections）
+//   category  属于哪个分区：game / level / code / art（对应 site.js 的 sections）
 //   featured  true = 放在分区里；false = 放到 More Work
 //   thumb     缩略图路径（images/ 文件夹），留空会显示色块
 //   thumbGif  鼠标悬停时播放的 GIF，可不填
@@ -14,6 +14,18 @@
 //   sections  项目页正文，类型见 README.md
 // =====================================================================
 window.PROJECTS = [
+  {
+    id: "rift-tactics",
+    title: "Rift Tactics",
+    category: "game",
+    featured: true,
+    summary: "Turn-based tactics prototype where terrain shifts every third turn.",
+    tags: ["Unity", "Team of 3", "Design doc"],
+    meta: { "My role": "Lead designer", Engine: "Unity", Team: "3", Duration: "8 weeks", Context: "Course project" },
+    sections: [
+      { type: "text", heading: "Overview", body: "Example project. Replace with your own." },
+    ],
+  },
   {
     id: "flooded-archive",
     title: "Flooded Archive",
@@ -95,7 +107,7 @@ window.PROJECTS = [
   {
     id: "puzzle-toolkit",
     title: "Modular Puzzle Toolkit",
-    category: "tech",
+    category: "code",
     featured: true,
     summary: "Blueprint toolkit so designers can wire switches, doors and timers without code.",
     tags: ["UE5 Blueprint", "Solo"],
@@ -107,7 +119,7 @@ window.PROJECTS = [
   {
     id: "tide-rider",
     title: "Tide Rider",
-    category: "tech",
+    category: "code",
     featured: true,
     summary: "Surf movement prototype with tunable wave physics.",
     tags: ["Unity", "Play in browser"],
@@ -130,8 +142,11 @@ window.PROJECTS = [
     ],
   },
 
+  // ---- Environment Art ----
+  { id: "desert-outpost", title: "Desert Outpost", category: "art", featured: true, summary: "Modular desert environment, UE5.", tags: ["UE5", "Maya", "Substance"], link: "" , sections: [] },
+  { id: "forest-shrine", title: "Forest Shrine", category: "art", featured: true, summary: "Stylized forest scene.", tags: ["UE5"], sections: [] },
+
   // ---- More Work（featured: false）----
-  { id: "desert-outpost", title: "Desert Outpost", category: "art", featured: false, summary: "Environment art", sections: [] },
-  { id: "jam-echo", title: "48h Jam: Echo", category: "level", featured: false, summary: "Game design", sections: [] },
-  { id: "forest-shrine", title: "Forest Shrine", category: "art", featured: false, summary: "Environment art", sections: [] },
+  { id: "jam-echo", title: "48h Jam: Echo", category: "game", featured: false, summary: "Game jam", sections: [] },
+  { id: "card-battler-doc", title: "Card Battler GDD", category: "game", featured: false, summary: "Design document", sections: [] },
 ];
