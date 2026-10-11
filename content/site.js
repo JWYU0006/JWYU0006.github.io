@@ -35,10 +35,11 @@ window.SITE = {
 
   // About 下面的技能列表。label 是左边的类别名，items 是标签。
   skills: [
-    { label: "Engines", items: ["Unreal Engine 5", "Unity"] },
-    { label: "Programming", items: ["C++", "C#", "Blueprint"] },
-    { label: "Design", items: ["Design documentation", "Rapid prototyping", "Level blockout", "Scrum"] },
-    { label: "Art", items: ["3D environment art"] },
+    { label: "Engines", items: ["Unreal Engine", "Unity", "UEFN", "FiveM"] },
+    { label: "Programming", items: ["C++", "Blueprint", "C#", "Lua", "Java"] },
+    { label: "Web & Data", items: ["HTML", "CSS", "JavaScript", "SQL"] },
+    { label: "Production", items: ["Scrum", "Jira", "Excel", "Design documentation", "Rapid prototyping"] },
+    { label: "Art", items: ["3ds Max", "Maya", "Blender", "ZBrush", "Substance 3D Painter", "Marmoset Toolbag", "Photoshop"] },
   ],
 
   // 首页的分区，按这里的顺序显示。
