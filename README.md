@@ -81,6 +81,9 @@ python -m http.server 8000
 { type: "story", heading: "Camera trigger zones", problem: "...", solution: "...", result: "...",
   clip: "images/zones.mp4" }
 
+// 分界线：把概括部分和细节部分分开，label 可以不填
+{ type: "divider", label: "Design breakdown" }
+
 // 文字。空一行就是新的一段
 { type: "text", heading: "Goal", body: "第一段\n\n第二段" }
 

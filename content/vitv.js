@@ -53,11 +53,11 @@
         "Camera trigger zones, and the overlap fix that stopped cameras flipping back and forth",
         "Dialogue trigger zones that pace the story by where the player walks",
         "Minigame-to-level links: rerouting power opens a door and turns on a light",
-        "Minigames themselves were designed by a teammate",
       ],
       youtube: "",
       sections: [
         intro,
+        { type: "divider", label: "Design breakdown" },
         {
           type: "point",
           heading: "Fixed surveillance cameras",
@@ -128,6 +128,7 @@
       youtube: "",
       sections: [
         intro,
+        { type: "divider", label: "Design breakdown" },
         {
           type: "point",
           heading: "Goals",
@@ -176,6 +177,7 @@
       ],
       sections: [
         intro,
+        { type: "divider", label: "Breakdown" },
         {
           type: "point",
           heading: "Bridging design and programming",
@@ -244,6 +246,7 @@
       ],
       sections: [
         intro,
+        { type: "divider", label: "Breakdown" },
         {
           type: "point",
           heading: "Character models and materials",

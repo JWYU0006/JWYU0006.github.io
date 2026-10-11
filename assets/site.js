@@ -233,15 +233,18 @@ function renderProject() {
     .map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`)
     .join("");
 
-  const hero = p.youtube
+  const heroMedia = p.youtube
     ? youtube(p.youtube, p.title)
     : p.clip
       ? clip(p.clip, "hero-clip", p.heroImage)
     : p.heroImage
       ? `<img class="thumb" style="border-radius:8px" src="${esc(p.heroImage)}" alt="">`
       : S.showDraftBanner
-        ? `<div class="embed ph">Gameplay video goes here (YouTube ID or MP4 clip)</div>`
+        ? `<div class="embed ph">Full playthrough video goes here (YouTube ID or MP4)</div>`
         : "";
+  const hero = heroMedia
+    ? `<section class="hero-video">${p.heroTitle !== "" ? `<h2>${esc(p.heroTitle || "Full playthrough")}</h2>` : ""}${heroMedia}</section>`
+    : "";
 
   const panels = [];
   if (p.itch)
@@ -269,9 +272,11 @@ function renderProject() {
 
   const body = (p.sections || [])
     .map((s, i) => {
+      if (s.type === "divider")
+        return `<div class="divider" role="separator">${s.label ? `<span>${esc(s.label)}</span>` : ""}</div>`;
       const render = SECTION[s.type];
       if (!render) return "";
-      return `${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${render(s, i)}`;
+      return `<section class="block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${render(s, i)}</section>`;
     })
     .join("");
 
@@ -281,27 +286,27 @@ function renderProject() {
   const prev = group[gi - 1];
   const next = group[gi + 1];
 
+  // The sidebar sits in its own column beside the whole page, header included.
+  el.classList.toggle("has-side", Boolean(relatedHtml));
   el.innerHTML = `
-    <a class="back" href="${backHref}">← All projects</a>
-    <header class="proj-head">
-      ${sectionTitle ? `<span class="eyebrow">${esc(sectionTitle)}</span>` : ""}
-      <h1>${esc(p.title)}</h1>
-      ${p.summary ? `<p>${esc(p.summary)}</p>` : ""}
-      ${meta ? `<dl class="meta">${meta}</dl>` : ""}
-    </header>
-    <div class="proj-layout${relatedHtml ? " has-side" : ""}">
-      <div class="proj-main">
-        ${highlights}
-        ${hero}
-        ${panels.length ? `<div class="play">${panels.join("")}</div>` : ""}
-        <article class="article">${body}</article>
+    <div class="proj-main">
+      <a class="back" href="${backHref}">← All projects</a>
+      <header class="proj-head">
+        ${sectionTitle ? `<span class="eyebrow">${esc(sectionTitle)}</span>` : ""}
+        <h1>${esc(p.title)}</h1>
+        ${p.summary ? `<p>${esc(p.summary)}</p>` : ""}
+        ${meta ? `<dl class="meta">${meta}</dl>` : ""}
+      </header>
+      ${highlights}
+      ${hero}
+      ${panels.length ? `<div class="play">${panels.join("")}</div>` : ""}
+      <article class="article">${body}</article>
+      <div class="next">
+        ${prev ? `<a class="btn" href="${esc(projectUrl(prev))}">← ${esc(prev.title)}</a>` : "<span></span>"}
+        ${next ? `<a class="btn" href="${esc(projectUrl(next))}">${esc(next.title)} →</a>` : ""}
       </div>
-      ${relatedHtml}
     </div>
-    <div class="next">
-      ${prev ? `<a class="btn" href="${esc(projectUrl(prev))}">← ${esc(prev.title)}</a>` : "<span></span>"}
-      ${next ? `<a class="btn" href="${esc(projectUrl(next))}">${esc(next.title)} →</a>` : ""}
-    </div>`;
+    ${relatedHtml}`;
   wire();
 }
 
