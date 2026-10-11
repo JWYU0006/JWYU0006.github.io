@@ -52,7 +52,7 @@ window.SITE = {
     { id: "game", title: "Game Design" },
     { id: "level", title: "Level Design" },
     { id: "code", title: "Gameplay Programming & Technical Design", nav: "Programming & Tech Design" }, // nav = 顶部导航栏里的短名
-    { id: "art", title: "Environment Art" },
+    { id: "art", title: "3D Art" },
   ],
 
   // true = 网站顶部显示“示例内容”提示条。全部换成真实内容后改成 false。

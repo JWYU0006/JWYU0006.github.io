@@ -8,6 +8,7 @@
 | --- | --- |
 | `content/site.js` | 名字、首页标题、联系方式、About、岗位分区 |
 | `content/projects.js` | 所有项目 |
+| `content/vitv.js` | Voice in the Void 的四个页面（一个项目拆成多页的写法可以参考它） |
 
 改完推送到 GitHub，大约 1 分钟后网站自动更新。也可以直接在项目里让 Claude 帮你改。
 
