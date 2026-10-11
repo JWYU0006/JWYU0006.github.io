@@ -243,7 +243,7 @@ function renderProject() {
         ? `<div class="embed ph">Full playthrough video goes here (YouTube ID or MP4)</div>`
         : "";
   const hero = heroMedia
-    ? `<section class="hero-video">${p.heroTitle !== "" ? `<h2>${esc(p.heroTitle || "Full playthrough")}</h2>` : ""}${heroMedia}</section>`
+    ? `<section class="hero-video" id="playthrough">${p.heroTitle !== "" ? `<h2>${esc(p.heroTitle || "Full playthrough")}</h2>` : ""}${heroMedia}</section>`
     : "";
 
   const panels = [];
@@ -267,7 +267,7 @@ function renderProject() {
         .join("")}</ul></aside>`
     : "";
   const highlights = p.highlights?.length
-    ? `<section class="highlights"><h2>Highlights</h2>${bullets(p.highlights)}</section>`
+    ? `<section class="highlights" id="highlights"><h2>Highlights</h2>${bullets(p.highlights)}</section>`
     : "";
 
   const body = (p.sections || [])
@@ -276,9 +276,21 @@ function renderProject() {
         return `<div class="divider" role="separator">${s.label ? `<span>${esc(s.label)}</span>` : ""}</div>`;
       const render = SECTION[s.type];
       if (!render) return "";
-      return `<section class="block">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${render(s, i)}</section>`;
+      return `<section class="block" id="s-${i}">${s.heading ? `<h2>${esc(s.heading)}</h2>` : ""}${render(s, i)}</section>`;
     })
     .join("");
+
+  // Table of contents for the left sidebar. Dividers become group labels.
+  const toc = [{ id: "overview", label: "Overview" }];
+  if (highlights) toc.push({ id: "highlights", label: "Highlights" });
+  if (hero && p.heroTitle !== "") toc.push({ id: "playthrough", label: p.heroTitle || "Full playthrough" });
+  (p.sections || []).forEach((s, i) => {
+    if (s.type === "divider") { if (s.label) toc.push({ group: s.label }); }
+    else if (s.heading && SECTION[s.type]) toc.push({ id: `s-${i}`, label: s.heading });
+  });
+  const tocHtml = `<nav class="toc" aria-label="On this page"><h3>On this page</h3><ul>${toc
+    .map((t) => (t.group ? `<li class="toc-group">${esc(t.group)}</li>` : `<li><a href="#${t.id}" data-toc="${t.id}">${esc(t.label)}</a></li>`))
+    .join("")}</ul></nav>`;
 
   // Prev / next within featured-or-more group to keep reviewers moving.
   const group = P.filter((x) => (x.featured === false) === (p.featured === false) && !x.link);
@@ -287,11 +299,12 @@ function renderProject() {
   const next = group[gi + 1];
 
   // The sidebar sits in its own column beside the whole page, header included.
-  el.classList.toggle("has-side", Boolean(relatedHtml));
+  el.classList.add("has-side");
   el.innerHTML = `
+    ${tocHtml}
     <div class="proj-main">
       <a class="back" href="${backHref}">← All projects</a>
-      <header class="proj-head">
+      <header class="proj-head" id="overview">
         ${sectionTitle ? `<span class="eyebrow">${esc(sectionTitle)}</span>` : ""}
         <h1>${esc(p.title)}</h1>
         ${p.summary ? `<p>${esc(p.summary)}</p>` : ""}
@@ -306,8 +319,27 @@ function renderProject() {
         ${next ? `<a class="btn" href="${esc(projectUrl(next))}">${esc(next.title)} →</a>` : ""}
       </div>
     </div>
-    ${relatedHtml}`;
+    ${relatedHtml || `<div class="side-spacer"></div>`}`;
   wire();
+  wireToc();
+}
+
+// Highlight the table-of-contents entry for the section being read.
+function wireToc() {
+  const links = [...document.querySelectorAll(".toc a[data-toc]")];
+  const targets = links.map((a) => document.getElementById(a.dataset.toc)).filter(Boolean);
+  if (!targets.length) return;
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const line = 120;
+    let current = targets[0];
+    for (const t of targets) if (t.getBoundingClientRect().top <= line) current = t;
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) current = targets[targets.length - 1];
+    links.forEach((a) => a.classList.toggle("active", a.dataset.toc === current.id));
+  };
+  window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
 }
 
 function wire() {
