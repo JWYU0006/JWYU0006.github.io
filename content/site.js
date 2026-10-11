@@ -29,19 +29,19 @@ window.SITE = {
 
   // About 部分，每个引号是一段
   about: [
-    "Before studying game design, I worked professionally as a 3D environment artist. That background shapes how I design: I think about readability, composition and player experience from the first blockout.",
-    "I'm now in the Honours Bachelor of Game Design program at Sheridan College, where I work across game design, level design and gameplay programming. I'm looking for internships and, after graduating in April 2028, full-time roles in Canada.",
+    "I'm a game design student at Sheridan College working across game design, level design and gameplay programming. I like to get ideas into the engine early, so I can test how they feel instead of only describing them on paper.",
+    "I'm looking for internships and, after graduating in April 2028, full-time roles in Canada.",
   ],
 
   // About 下面的技能列表。label 是左边的类别名，items 是标签。
   skills: [
-    { label: "Engines", items: ["Unreal Engine", "Unity", "UEFN", "FiveM"] },
-    { label: "Engine tools", items: ["Behavior Trees", "ProBuilder", "Material Editor"] },
+    { label: "Engines", items: ["Unreal Engine", "Unity", "UEFN", "FiveM", "Creation Kit (Skyrim)"] },
+    { label: "Engine tools", items: ["Dynamic Mesh", "Custom Gravity", "Behavior Trees", "ProBuilder", "Material Editor"] },
     { label: "Programming", items: ["C++", "Blueprint", "C#", "Lua", "Java"] },
-    { label: "Web & Data", items: ["HTML", "CSS", "JavaScript", "SQL"] },
+    { label: "Web & Data", items: ["HTML", "CSS", "JavaScript", "JSON", "SQL"] },
     { label: "Design & Production", items: ["Scrum", "Jira", "Excel", "Miro", "Figma", "Twine"] },
     { label: "Dev tools", items: ["Git (GitHub Desktop)", "Visual Studio", "VS Code", "Rider"] },
-    { label: "Art & Video", items: ["3ds Max", "Maya", "Blender", "ZBrush", "Substance 3D Painter", "Marmoset Toolbag", "Marvelous Designer", "Photoshop", "Premiere Pro"] },
+    { label: "Art & Video", items: ["3ds Max", "Maya", "Blender", "ZBrush", "Substance 3D Painter", "Marmoset Toolbag", "Marvelous Designer", "SketchUp", "Photoshop", "Premiere Pro"] },
     { label: "Languages", items: ["Mandarin (native)", "English"] },
   ],
 
