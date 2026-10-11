@@ -21,8 +21,8 @@ window.SITE = {
 
   // 联系方式。不想显示的项留空 ""，按钮就会自动隐藏。
   resume: "resume.pdf", // 把简历 PDF 放到网站根目录，文件名保持一致
-  email: "",
-  linkedin: "",
+  email: "jwyu0006@gmail.com",
+  linkedin: "https://www.linkedin.com/in/jiawei-yu-4515043bb/",
   github: "https://github.com/JWYU0006",
   itch: "",
   artstation: "",
