@@ -1,6 +1,6 @@
 # 作品集网站使用说明
 
-网址：https://jwyu0006.github.io
+网址：[https://jwyu0006.github.io](https://jwyu0006.github.io)
 
 平时只需要改 `content/` 文件夹里的两个文件，其他文件都不用动：
 
