@@ -49,7 +49,7 @@
       meta: meta("Systems designer"),
       related: related("vitv-systems"),
       highlights: [
-        "Fixed surveillance cameras that make the player feel watched",
+        "Surveillance cameras that make the player feel watched, with a dead zone that stops jitter when they follow",
         "Click-to-move that stays consistent across camera cuts",
         "Camera trigger zones, and the overlap fix that stopped cameras flipping back and forth",
         "Dialogue trigger zones that pace the story by where the player walks",
@@ -60,15 +60,20 @@
         intro,
         { type: "divider", label: "Design breakdown" },
         {
-          type: "point",
-          heading: "Fixed surveillance cameras",
+          type: "story",
+          heading: "Surveillance cameras",
           lead: "The player sees the ship through security cameras, so they feel watched.",
           bullets: [
             "Inspired by the fixed cameras of early Resident Evil.",
             "Supports the core theme: you can't be sure who is on the other end of the radio.",
             "Each shot only needs art for what its camera sees, which saved time for a small team.",
           ],
-          mediaLabel: "camera cuts between rooms",
+          problem:
+            "Fully fixed cameras showed too little of each room. Letting them turn to follow the player fixed that, but when they turned quickly the view jittered.",
+          solution:
+            "Added a dead zone: a camera only turns once the player moves a set angle away from the centre of its view.",
+          result: "Steady shots that still keep the player in frame.",
+          mediaLabel: "camera following the player with a dead zone",
         },
         {
           type: "point",
@@ -154,6 +159,7 @@
           bullets: [
             "Each shot has to show where the player can go and what they can interact with.",
             "Camera trigger zones are part of the layout itself.",
+            "I placed every camera, then tested and tuned each one's dead zone and turn speed individually.",
           ],
           mediaLabel: "camera placement on the level map",
         },
