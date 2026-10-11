@@ -8,7 +8,10 @@
 //   featured  true = 放在分区里；false = 放到 More Work
 //   thumb     缩略图路径（images/ 文件夹），留空会显示色块
 //   thumbGif  鼠标悬停时播放的 GIF，可不填
+//   thumbVideo 鼠标悬停时播放的 MP4 短视频（比 GIF 清晰、文件小），可不填
 //   youtube   YouTube 视频 ID（网址 v= 后面那串），可不填
+//   clip      项目页顶部自动循环播放的 MP4 短视频（没有 youtube 时使用），可不填
+//   related   同一个项目的其他页面 [{ id, role }]，可不填
 //   itch      itch.io 网页版嵌入地址，可不填（UE 项目不能用）
 //   download  可下载版本 { url, label }，可不填
 //   sections  项目页正文，类型见 README.md
@@ -43,8 +46,11 @@ window.PROJECTS = [
       Context: "Course project",
     },
     youtube: "",
+    clip: "",
     itch: "",
     download: { url: "", label: "Windows build on itch.io" },
+    // 同一个项目的其他页面：role 写你在那部分的身份，id 写那个页面的 id
+    related: [{ id: "forest-shrine", role: "Environment artist" }],
     sections: [
       {
         type: "text",
@@ -144,7 +150,7 @@ window.PROJECTS = [
 
   // ---- Environment Art ----
   { id: "desert-outpost", title: "Desert Outpost", category: "art", featured: true, summary: "Modular desert environment, UE5.", tags: ["UE5", "Maya", "Substance"], link: "" , sections: [] },
-  { id: "forest-shrine", title: "Forest Shrine", category: "art", featured: true, summary: "Stylized forest scene.", tags: ["UE5"], sections: [] },
+  { id: "forest-shrine", title: "Forest Shrine", category: "art", featured: true, summary: "Stylized forest scene.", tags: ["UE5"], related: [{ id: "flooded-archive", role: "Level designer" }], sections: [] },
 
   // ---- More Work（featured: false）----
   { id: "jam-echo", title: "48h Jam: Echo", category: "game", featured: false, summary: "Game jam", sections: [] },

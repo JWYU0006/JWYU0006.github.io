@@ -25,7 +25,17 @@ const phStyle = (key) => {
 const projectUrl = (p) => p.link || `project.html?id=${encodeURIComponent(p.id)}`;
 const isExternal = (p) => Boolean(p.link);
 
+const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+// Silent looping clip. Autoplays unless the viewer prefers reduced motion.
+function clip(src, cls = "", poster = "") {
+  const auto = reduceMotion ? "controls" : "autoplay";
+  return `<video class="${cls}" src="${esc(src)}" ${auto} muted loop playsinline preload="metadata"${poster ? ` poster="${esc(poster)}"` : ""}></video>`;
+}
+
 function thumb(p, label = "") {
+  if (p.thumbVideo)
+    return `<video class="thumb" src="${esc(p.thumbVideo)}" muted loop playsinline preload="metadata"${p.thumb ? ` poster="${esc(p.thumb)}"` : ""} data-hover></video>`;
   if (!p.thumb) return `<div class="thumb ph" style="${phStyle(p.id)}">${esc(label)}</div>`;
   const gif = p.thumbGif ? ` data-gif="${esc(p.thumbGif)}" data-still="${esc(p.thumb)}"` : "";
   return `<img class="thumb" src="${esc(p.thumb)}" alt="" loading="lazy"${gif}>`;
@@ -141,6 +151,7 @@ function youtube(id, title) {
 
 const SECTION = {
   text: (s) => paras(s.body),
+  clip: (s) => clip(s.src, "section-clip") + (s.caption ? `<p class="caption">${esc(s.caption)}</p>` : ""),
   list: (s) => `<div class="callout"><ul>${(s.items || []).map((i) => `<li>${esc(i)}</li>`).join("")}</ul></div>`,
   code: (s) =>
     `<pre><code>${esc(s.code)}</code></pre>${s.link ? `<p class="caption"><a href="${esc(s.link)}" target="_blank" rel="noopener">Full source on GitHub →</a></p>` : ""}`,
@@ -196,10 +207,12 @@ function renderProject() {
 
   const hero = p.youtube
     ? youtube(p.youtube, p.title)
+    : p.clip
+      ? clip(p.clip, "hero-clip", p.heroImage)
     : p.heroImage
       ? `<img class="thumb" style="border-radius:8px" src="${esc(p.heroImage)}" alt="">`
       : S.showDraftBanner
-        ? `<div class="embed ph">Gameplay video goes here (add a YouTube ID)</div>`
+        ? `<div class="embed ph">Gameplay video goes here (YouTube ID or MP4 clip)</div>`
         : "";
 
   const panels = [];
@@ -212,6 +225,16 @@ function renderProject() {
   if (p.github)
     panels.push(`<div class="panel"><h3>Source code</h3><p>Full project on GitHub.</p>
       <a class="btn" style="justify-self:start" href="${esc(p.github)}" target="_blank" rel="noopener">View on GitHub</a></div>`);
+
+  // Other pages about the same project (e.g. its level design or art breakdown).
+  const related = (p.related || [])
+    .map((r) => ({ ...r, target: P.find((x) => x.id === r.id) }))
+    .filter((r) => r.target);
+  const relatedHtml = related.length
+    ? `<aside class="related"><h3>Also on this project</h3><ul>${related
+        .map((r) => `<li><span>${esc(r.role)}</span><a href="${esc(projectUrl(r.target))}">${esc(r.target.title)} →</a></li>`)
+        .join("")}</ul></aside>`
+    : "";
 
   const body = (p.sections || [])
     .map((s, i) => {
@@ -234,6 +257,7 @@ function renderProject() {
       <h1>${esc(p.title)}</h1>
       ${p.summary ? `<p>${esc(p.summary)}</p>` : ""}
       ${meta ? `<dl class="meta">${meta}</dl>` : ""}
+      ${relatedHtml}
     </header>
     ${hero}
     ${panels.length ? `<div class="play">${panels.join("")}</div>` : ""}
@@ -251,6 +275,12 @@ function wire() {
     const host = img.closest("a") || img;
     host.addEventListener("mouseenter", () => (img.src = img.dataset.gif));
     host.addEventListener("mouseleave", () => (img.src = img.dataset.still));
+  });
+  // Hover-to-play video thumbnails
+  document.querySelectorAll("video[data-hover]").forEach((v) => {
+    const host = v.closest("a") || v;
+    host.addEventListener("mouseenter", () => v.play().catch(() => {}));
+    host.addEventListener("mouseleave", () => v.pause());
   });
   // Before / after slider
   document.querySelectorAll("[data-compare]").forEach((box) => {

@@ -26,7 +26,9 @@ python -m http.server 8000
 - 图片和 GIF 放进 `images/` 文件夹，在内容文件里写 `"images/文件名.jpg"`。
 - 简历 PDF 放在根目录，命名为 `resume.pdf`。
 - 缩略图建议用 16:9 的比例，宽度 1280 像素左右。GIF 尽量控制在 5MB 以内。
-- 视频不要放进仓库。先上传到 YouTube（可以设成“不公开”），再把视频 ID 填进内容文件。
+- **视频有两种放法**：
+  - **短视频（5–20 秒、无声、循环播放）**：导出成 MP4 放进 `images/`，用 `clip`、`thumbVideo` 或正文里的 `clip` 模块。打开页面就自动播放，效果和 GIF 一样，但更清晰，文件也小得多。每个文件尽量控制在 10MB 以内，GitHub 单个文件上限是 100MB。
+  - **长视频（完整流程、有声音）**：上传到 YouTube（可以设成“不公开”），把视频 ID 填进 `youtube`。
 
 ## 一个项目的完整写法
 
@@ -47,11 +49,16 @@ python -m http.server 8000
     Duration: "6 weeks",
     Context: "Course project",
   },
+  thumbVideo: "images/flooded-loop.mp4", // 鼠标悬停时播放的短视频，比 GIF 更好，可不填
   youtube: "dQw4w9WgXcQ",         // 视频网址 v= 后面那一串
+  clip: "images/flooded-loop.mp4", // 没有 YouTube 时，顶部改为自动循环播放这个短视频
   heroImage: "",                  // 没有视频时用一张大图代替
   itch: "",                       // itch.io 网页版的嵌入地址（只有 Unity/Godot 的 WebGL 版本才有）
   download: { url: "https://xxx.itch.io/xxx", label: "Windows build, 1.4 GB" },
   github: "",                     // 完整代码的仓库链接
+  related: [                      // 同一项目拆成多个页面时，互相链接
+    { id: "flooded-archive-art", role: "Environment artist" },
+  ],
   link: "",                       // 填了的话，点卡片会直接跳到这个外部链接（比如 ArtStation），不进项目页
   sections: [ ... ],              // 项目页正文，见下面
 }
@@ -85,9 +92,16 @@ python -m http.server 8000
 // 多张图片
 { type: "images", heading: "Process", images: [ { src: "images/a.jpg", caption: "说明" } ] }
 
+// 自动循环播放的短视频（MP4，无声）
+{ type: "clip", heading: "Wall-run prototype", src: "images/wallrun.mp4", caption: "说明" }
+
 // 额外的视频
 { type: "video", heading: "Combat encounter", youtube: "视频ID", caption: "说明" }
 ```
+
+## 一个项目拆成多个页面
+
+比如一个项目你同时负责了关卡和美术：做两个项目，`category` 分别填 `level` 和 `art`，标题写成 “Project X: Level Design” 和 “Project X: Environment Art”。两个项目都加上 `related`，互相指向对方，每个页面顶部就会显示 “Also on this project”，写着你在另一部分的身份，点击就能跳过去。
 
 ## 上线前检查
 
