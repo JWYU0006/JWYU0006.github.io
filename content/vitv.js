@@ -117,7 +117,10 @@
           heading: "Scanner tool",
           lead: "The player carries a scanner that reveals information hidden in the level.",
           bullets: [
-            "Door codes are placed on walls as decals, so the player finds them by scanning.",
+            "Why: part of the story is meant to be told through the environment, and the scanner is how the player reads it.",
+            "Built a door code as a proof of concept: a decal on the wall that the scanner reveals.",
+            "Why a decal: one image can go on any wall, and it makes the reveal effect easy to build.",
+            "Planned next: scanning props scattered around the ship. Not finished within the semester.",
           ],
           mediaLabel: "scanning a wall to reveal a code",
         },
