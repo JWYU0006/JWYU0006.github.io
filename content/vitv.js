@@ -26,7 +26,7 @@
     Engine: "Unreal Engine 5.6",
     Team: "5",
     Duration: "One semester",
-    Context: "Course project, Sheridan College",
+    Context: "Course project",
   });
 
   const related = (self) =>
@@ -45,6 +45,7 @@
       featured: true,
       summary: "Camera, movement and world-interaction systems for a point-and-click sci-fi thriller.",
       tags: ["UE 5.6", "Team of 5", "Systems design"],
+      thumb: "images/vitv-cover.jpg",
       meta: meta("Systems designer"),
       related: related("vitv-systems"),
       highlights: [
@@ -54,7 +55,7 @@
         "Dialogue trigger zones that pace the story by where the player walks",
         "Minigame-to-level links: rerouting power opens a door and turns on a light",
       ],
-      youtube: "",
+      youtube: "H453xrXbhXc", // 完整关卡流程（YouTube 不公开视频）
       sections: [
         intro,
         { type: "divider", label: "Design breakdown" },
@@ -83,8 +84,13 @@
         {
           type: "story",
           heading: "Camera trigger zones",
+          lead: "Walk into a zone and the view cuts to that zone's camera.",
+          bullets: [
+            "Every camera owns an invisible trigger volume that covers the area it films.",
+            "When the player enters a volume, the active camera switches to the one that owns it.",
+          ],
           problem:
-            "Each camera owns a trigger zone. Players who click rapidly could land their next click back in the previous zone right after a cut, so the view flipped between two cameras over and over.",
+            "Players who click rapidly could land their next click back in the previous zone right after a cut, so the view flipped between two cameras over and over.",
           solution:
             "Overlap neighbouring zones instead of placing them edge to edge, so the player has to walk a short distance before the previous zone can trigger again.",
           result: "The flip-flopping stopped.",
@@ -117,6 +123,7 @@
       featured: true,
       summary: "A claustrophobic research ship built for exploration, environmental clues and fixed-camera framing.",
       tags: ["UE 5.6", "Team of 5", "Level design lead"],
+      thumb: "images/vitv-cover.jpg",
       meta: meta("Level design lead"),
       related: related("vitv-level"),
       highlights: [
@@ -125,7 +132,7 @@
         "Rooms laid out together with fixed camera angles and their trigger zones",
         "Progress gated by minigame outcomes that visibly change the level",
       ],
-      youtube: "",
+      youtube: "H453xrXbhXc", // 完整关卡流程（YouTube 不公开视频）
       sections: [
         intro,
         { type: "divider", label: "Design breakdown" },
@@ -165,6 +172,8 @@
       featured: true,
       summary: "Turning design ideas into buildable systems, setting up pipelines and helping teammates use them.",
       tags: ["UE 5.6", "Maya", "Team of 5", "Technical design"],
+      thumb: "images/vitv-cover.jpg",
+      youtube: "H453xrXbhXc",
       meta: meta("Technical designer"),
       related: related("vitv-tech"),
       highlights: [
@@ -237,6 +246,9 @@
       featured: true,
       summary: "Game-ready character model and materials built on a shared animation skeleton.",
       tags: ["UE 5.6", "Maya", "Substance 3D Painter"],
+      thumb: "images/vitv-cover.jpg",
+      heroImage: "images/vitv-cover.jpg", // 之后换成角色渲染图
+      heroTitle: "",
       meta: meta("3D character artist"),
       related: related("vitv-art"),
       highlights: [

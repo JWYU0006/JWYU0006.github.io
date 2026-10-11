@@ -169,7 +169,7 @@ const SECTION = {
   story: (s) =>
     withMedia(
       s,
-      `<dl class="story">${[
+      `${s.lead ? `<p class="lead">${esc(s.lead)}</p>` : ""}${bullets(s.bullets)}<dl class="story">${[
         ["Problem", s.problem],
         ["Solution", s.solution],
         ["Result", s.result],
