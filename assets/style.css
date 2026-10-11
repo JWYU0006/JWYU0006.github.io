@@ -63,7 +63,7 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; text-wra
 .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
 .eyebrows { display: grid; gap: 4px; }
 .status { font-size: 14px; color: var(--muted); }
-.hero h1 { font-size: clamp(32px, 5.4vw, 54px); max-width: 22ch; }
+.hero h1 { font-size: clamp(30px, 4.6vw, 50px); max-width: 30ch; }
 .intro { display: grid; gap: 6px; max-width: 64ch; }
 .intro p { margin: 0; color: var(--muted); font-size: 17px; }
 .intro .school { color: var(--fg); font-weight: 600; }
