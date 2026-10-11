@@ -120,7 +120,7 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; text-wra
 .back:hover { color: var(--fg); }
 .proj-head { padding-block: 14px 22px; display: grid; gap: 12px; }
 .proj-head h1 { font-size: clamp(30px, 4.8vw, 46px); }
-.proj-head p { margin: 0; color: var(--muted); max-width: 62ch; font-size: 17px; }
+.proj-head p { margin: 0; color: var(--muted); font-size: 17px; }
 .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; margin: 0; }
 .meta div { background: var(--surface); padding: 10px 14px; }
 .meta dt { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
@@ -131,11 +131,30 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; text-wra
 .embed.ph { background: var(--sunk); display: grid; place-items: center; color: var(--muted); font-family: var(--mono); font-size: 13px; text-align: center; padding: 16px; }
 
 .hero-clip, .section-clip { width: 100%; border-radius: 8px; display: block; background: #000; }
-.related { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; max-width: 760px; }
-.related h3 { font-size: 15px; margin-bottom: 8px; }
-.related ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-.related li { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
-.related span { font-family: var(--mono); font-size: 12px; color: var(--muted); min-width: 150px; }
+.proj-layout { display: grid; gap: 28px; }
+.proj-layout.has-side { grid-template-columns: minmax(0, 1fr) 220px; align-items: start; }
+.proj-main { min-width: 0; display: grid; gap: 18px; align-content: start; }
+.related { position: sticky; top: 76px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.related h3 { font-size: 15px; margin-bottom: 10px; }
+.related ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.related li { display: grid; gap: 2px; }
+.related span { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+@media (max-width: 860px) {
+  .proj-layout.has-side { grid-template-columns: 1fr; }
+  .related { position: static; }
+}
+.highlights { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 8px; padding: 14px 18px; }
+.highlights h2 { font-size: 17px; margin-bottom: 6px; }
+.highlights ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 20px; align-items: start; }
+.split-text { min-width: 0; display: grid; gap: 10px; }
+.split-media .embed.ph { aspect-ratio: 16 / 9; }
+.section-img { width: 100%; border-radius: 8px; }
+@media (max-width: 700px) { .split { grid-template-columns: 1fr; } }
+.lead { font-weight: 600; }
+.story { margin: 0; display: grid; gap: 10px; }
+.story dt { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--accent); }
+.story dd { margin: 2px 0 0; }
 .related a { font-weight: 600; text-decoration: none; color: var(--accent); }
 .related a:hover { text-decoration: underline; }
 .play { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 18px; }
@@ -143,7 +162,7 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; text-wra
 .panel h3 { font-size: 17px; }
 .panel p { margin: 0; font-size: 14px; color: var(--muted); }
 
-.article { max-width: 760px; display: grid; gap: 14px; padding-block: 24px 12px; }
+.article { display: grid; gap: 14px; padding-block: 6px 12px; }
 .article h2 { font-size: 23px; margin-top: 22px; }
 .article p { margin: 0; }
 .article ul { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
@@ -182,3 +201,4 @@ pre { margin: 0; background: var(--sunk); border: 1px solid var(--line); border-
   html { scroll-behavior: auto; }
   .card { transition: none; }
 }
+.article > p, .article > ul, .article > .callout { max-width: 72ch; }

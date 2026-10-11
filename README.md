@@ -61,6 +61,7 @@ python -m http.server 8000
     { id: "flooded-archive-art", role: "Environment artist" },
   ],
   link: "",                       // 填了的话，点卡片会直接跳到这个外部链接（比如 ArtStation），不进项目页
+  highlights: ["要点1", "要点2"], // 项目页顶部的 Highlights 框
   sections: [ ... ],              // 项目页正文，见下面
 }
 ```
@@ -72,6 +73,14 @@ python -m http.server 8000
 可以随意组合，排列顺序就是在页面上显示的顺序。每个模块的 `heading` 都可以不填。
 
 ```js
+// 推荐：加粗结论 + bullet。clip 或 image 会显示在文字右边
+{ type: "point", heading: "Click-to-move", lead: "一句话结论", bullets: ["要点1", "要点2"],
+  clip: "images/move.mp4", mediaLabel: "素材到位前占位框里的说明" }
+
+// 推荐：问题 → 方案 → 结果
+{ type: "story", heading: "Camera trigger zones", problem: "...", solution: "...", result: "...",
+  clip: "images/zones.mp4" }
+
 // 文字。空一行就是新的一段
 { type: "text", heading: "Goal", body: "第一段\n\n第二段" }
 

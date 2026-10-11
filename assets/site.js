@@ -149,7 +149,35 @@ function youtube(id, title) {
     title="${esc(title)}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`;
 }
 
+// Media beside a section: an MP4 loop, an image, or (while drafting) a labelled placeholder.
+function sideMedia(s) {
+  if (s.clip) return clip(s.clip, "section-clip", s.image);
+  if (s.image) return `<img class="section-img" src="${esc(s.image)}" alt="${esc(s.mediaLabel || s.heading || "")}" loading="lazy">`;
+  if (S.showDraftBanner && s.mediaLabel) return `<div class="embed ph">Clip: ${esc(s.mediaLabel)}</div>`;
+  return "";
+}
+const withMedia = (s, text) => {
+  const media = sideMedia(s);
+  return media ? `<div class="split"><div class="split-text">${text}</div><div class="split-media">${media}</div></div>` : text;
+};
+const bullets = (items) => (items?.length ? `<ul>${items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>` : "");
+
 const SECTION = {
+  // Bold takeaway, then bullets, with optional media beside it.
+  point: (s) => withMedia(s, `${s.lead ? `<p class="lead">${esc(s.lead)}</p>` : ""}${bullets(s.bullets)}${s.body ? paras(s.body) : ""}`),
+  // Problem → solution → result.
+  story: (s) =>
+    withMedia(
+      s,
+      `<dl class="story">${[
+        ["Problem", s.problem],
+        ["Solution", s.solution],
+        ["Result", s.result],
+      ]
+        .filter(([, v]) => v)
+        .map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`)
+        .join("")}</dl>`,
+    ),
   text: (s) => paras(s.body),
   clip: (s) => clip(s.src, "section-clip") + (s.caption ? `<p class="caption">${esc(s.caption)}</p>` : ""),
   list: (s) => `<div class="callout"><ul>${(s.items || []).map((i) => `<li>${esc(i)}</li>`).join("")}</ul></div>`,
@@ -232,8 +260,11 @@ function renderProject() {
     .filter((r) => r.target);
   const relatedHtml = related.length
     ? `<aside class="related"><h3>Also on this project</h3><ul>${related
-        .map((r) => `<li><span>${esc(r.role)}</span><a href="${esc(projectUrl(r.target))}">${esc(r.target.title)} →</a></li>`)
+        .map((r) => `<li><span>${esc(r.role)}</span><a href="${esc(projectUrl(r.target))}">${esc(r.target.title.replace(/^.*?:\s*/, ""))} →</a></li>`)
         .join("")}</ul></aside>`
+    : "";
+  const highlights = p.highlights?.length
+    ? `<section class="highlights"><h2>Highlights</h2>${bullets(p.highlights)}</section>`
     : "";
 
   const body = (p.sections || [])
@@ -257,11 +288,16 @@ function renderProject() {
       <h1>${esc(p.title)}</h1>
       ${p.summary ? `<p>${esc(p.summary)}</p>` : ""}
       ${meta ? `<dl class="meta">${meta}</dl>` : ""}
-      ${relatedHtml}
     </header>
-    ${hero}
-    ${panels.length ? `<div class="play">${panels.join("")}</div>` : ""}
-    <article class="article">${body}</article>
+    <div class="proj-layout${relatedHtml ? " has-side" : ""}">
+      <div class="proj-main">
+        ${highlights}
+        ${hero}
+        ${panels.length ? `<div class="play">${panels.join("")}</div>` : ""}
+        <article class="article">${body}</article>
+      </div>
+      ${relatedHtml}
+    </div>
     <div class="next">
       ${prev ? `<a class="btn" href="${esc(projectUrl(prev))}">← ${esc(prev.title)}</a>` : "<span></span>"}
       ${next ? `<a class="btn" href="${esc(projectUrl(next))}">${esc(next.title)} →</a>` : ""}
