@@ -52,7 +52,8 @@
         "Surveillance cameras that make the player feel watched, with a dead zone that stops jitter when they follow",
         "Click-to-move that stays consistent across camera cuts",
         "Camera trigger zones, and the overlap fix that stopped cameras flipping back and forth",
-        "Dialogue trigger zones that pace the story by where the player walks",
+        "Dialogue trigger zones that pace the story by where the player walks, with flags so each line plays once",
+        "A scanner tool for finding codes hidden on the walls",
         "Minigame-to-level links: rerouting power opens a door and turns on a light",
       ],
       youtube: "H453xrXbhXc", // 完整关卡流程（YouTube 不公开视频）
@@ -72,7 +73,7 @@
             "Fully fixed cameras showed too little of each room. Letting them turn to follow the player fixed that, but when they turned quickly the view jittered.",
           solution:
             "Added a dead zone: a camera only turns once the player moves a set angle away from the centre of its view.",
-          result: "Steady shots that still keep the player in frame.",
+          result: "Steady shots that still keep the player in frame. I then tested every camera and tuned its dead zone and turn speed one by one.",
           mediaLabel: "camera following the player with a dead zone",
         },
         {
@@ -102,11 +103,23 @@
           mediaLabel: "zones edge to edge vs. overlapping",
         },
         {
-          type: "point",
+          type: "story",
           heading: "Dialogue trigger zones",
           lead: "Story beats start when the player walks into specific areas.",
           bullets: ["The narrative is paced by where the player goes, not by menus."],
+          problem: "In testing, walking out of a zone and back in played the same dialogue again.",
+          solution: "Each dialogue sets a flag once it has played. The flags are shared, so other systems can also check what the player has heard.",
+          result: "Every dialogue plays once, and dialogue progress can drive other events.",
           mediaLabel: "walking into a dialogue zone",
+        },
+        {
+          type: "point",
+          heading: "Scanner tool",
+          lead: "The player carries a scanner that reveals information hidden in the level.",
+          bullets: [
+            "Door codes are placed on walls as decals, so the player finds them by scanning.",
+          ],
+          mediaLabel: "scanning a wall to reveal a code",
         },
         {
           type: "point",
