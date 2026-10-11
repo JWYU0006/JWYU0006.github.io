@@ -84,10 +84,10 @@
         {
           type: "story",
           heading: "Camera trigger zones",
-          lead: "Walk into a zone and the view cuts to that zone's camera.",
+          lead: "Each camera can own several trigger volumes, placed freely to fit the level.",
           bullets: [
-            "Every camera owns an invisible trigger volume that covers the area it films.",
-            "When the player enters a volume, the active camera switches to the one that owns it.",
+            "Volumes follow the shape of the space, so the right camera takes over from whichever direction the player approaches.",
+            "Because they fit the space tightly, nearby areas don't trigger the wrong camera.",
           ],
           problem:
             "Players who click rapidly could land their next click back in the previous zone right after a cut, so the view flipped between two cameras over and over.",
@@ -108,6 +108,7 @@
           heading: "Minigames that change the level",
           lead: "I designed how minigame choices change the world.",
           bullets: [
+            "Why: the project's goal was choices that matter, so a choice has to show up in the world, not just in a text box.",
             "In the power-distribution minigame, how the player routes power changes the level.",
             "A door becomes usable and a light comes on.",
             "The full game wasn't finished, but this proved the chain works from a minigame decision to a visible change in the level.",
