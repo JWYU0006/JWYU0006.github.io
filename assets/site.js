@@ -277,8 +277,14 @@ const SECTION = {
 
 function renderProject() {
   renderChrome(false);
-  const id = new URLSearchParams(location.search).get("id");
-  const idx = P.findIndex((p) => p.id === id);
+  const id = (new URLSearchParams(location.search).get("id") || "").trim().toLowerCase();
+  let idx = P.findIndex((p) => p.id === id);
+  // A short id like "vitv" opens the first page whose id starts with "vitv-",
+  // so links keep working when a project is later split into several pages.
+  if (idx < 0 && id) {
+    idx = P.findIndex((p) => p.id.startsWith(id + "-"));
+    if (idx >= 0) history.replaceState(null, "", `?id=${encodeURIComponent(P[idx].id)}${location.hash}`);
+  }
   const el = document.getElementById("project");
   if (idx < 0) {
     el.innerHTML = `<div class="notfound"><h1>Project not found</h1><p><a class="btn primary" href="index.html">Back to portfolio</a></p></div>`;

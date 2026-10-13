@@ -116,6 +116,10 @@ python -m http.server 8000
 
 比如一个项目你同时负责了关卡和美术：做两个项目，`category` 分别填 `level` 和 `art`，标题写成 “Project X: Level Design” 和 “Project X: Environment Art”。两个项目都加上 `related`，互相指向对方，每个页面顶部就会显示 “Also on this project”，写着你在另一部分的身份，点击就能跳过去。
 
+## 短链接
+
+`project.html?id=vitv` 这种只写前半段的链接，会自动打开第一个以 `vitv-` 开头的页面（按 `PROJECTS` 里的顺序），地址栏也会跟着改成完整的 id。所以一个项目以后拆成多页时，id 保持 “项目名-分类” 的格式，旧链接就不会失效。
+
 ## 上线前检查
 
 - `site.js` 里的 `showDraftBanner` 改成 `false`。
