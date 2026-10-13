@@ -92,8 +92,12 @@ function wireTheme() {
 
 // Left "On this page" sidebar. Items: { id, label } or { group } for a small heading.
 function tocNav(items) {
+  let inGroup = false;
   return `<nav class="toc" aria-label="On this page"><h3>On this page</h3><ul>${items
-    .map((t) => (t.group ? `<li class="toc-group">${esc(t.group)}</li>` : `<li><a href="#${t.id}" data-toc="${t.id}">${esc(t.label)}</a></li>`))
+    .map((t) => {
+      if (t.group) { inGroup = true; return `<li class="toc-group">${esc(t.group)}</li>`; }
+      return `<li${inGroup ? ` class="toc-sub"` : ""}><a href="#${t.id}" data-toc="${t.id}">${esc(t.label)}</a></li>`;
+    })
     .join("")}</ul></nav>`;
 }
 

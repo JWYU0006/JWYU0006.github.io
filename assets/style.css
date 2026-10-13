@@ -79,7 +79,7 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; text-wra
 .eyebrows { display: grid; gap: 4px; }
 .status { font-size: 14px; color: var(--muted); }
 .hero h1 { font-size: clamp(30px, 4.6vw, 50px); max-width: 30ch; }
-.intro { display: grid; gap: 6px; max-width: 64ch; }
+.intro { display: grid; gap: 6px; }
 .intro p { margin: 0; color: var(--muted); font-size: 17px; }
 .intro .school { color: var(--fg); font-weight: 600; }
 .links { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -119,7 +119,7 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; text-wra
 .mini div { min-width: 0; font-size: 13px; color: var(--muted); }
 .mini b { display: block; color: var(--fg); font-weight: 600; font-size: 14px; }
 
-.about { display: grid; gap: 12px; max-width: 68ch; }
+.about { display: grid; gap: 12px; }
 .about p { margin: 0; }
 .skills { display: grid; gap: 10px; margin: 20px 0 0; max-width: 760px; }
 .skills div { display: grid; grid-template-columns: 170px 1fr; gap: 10px; align-items: baseline; }
@@ -153,7 +153,9 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; text-wra
 .toc li a { display: block; padding: 5px 0 5px 12px; margin-left: -1px; border-left: 2px solid transparent; font-size: 14px; line-height: 1.35; color: var(--muted); text-decoration: none; }
 .toc li a:hover { color: var(--fg); }
 .toc li a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
-.toc .toc-group { padding: 12px 0 4px 12px; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+/* Group label: not a link, so it sits on the rail with an accent rule and darker text. */
+.toc .toc-group { margin: 14px 0 4px -1px; padding: 6px 0 4px 12px; border-top: 1px solid var(--line); border-left: 2px solid var(--line); font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--fg); cursor: default; }
+.toc li.toc-sub a { padding-left: 24px; }
 .proj-main { min-width: 0; display: grid; gap: 22px; align-content: start; }
 .proj-main > .proj-head { padding-bottom: 0; }
 .related { position: sticky; top: 76px; margin-top: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
