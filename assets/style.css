@@ -121,7 +121,7 @@ h1, h2, h3 { font-family: var(--display); line-height: 1.15; margin: 0; text-wra
 
 .about { display: grid; gap: 12px; }
 .about p { margin: 0; }
-.skills { display: grid; gap: 10px; margin: 20px 0 0; max-width: 760px; }
+.skills { display: grid; gap: 10px; margin: 20px 0 0; }
 .skills div { display: grid; grid-template-columns: 170px 1fr; gap: 10px; align-items: baseline; }
 .skills dt { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
 .skills dd { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
