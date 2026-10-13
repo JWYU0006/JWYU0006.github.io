@@ -25,7 +25,7 @@ python -m http.server 8000
 ## 图片、GIF 和简历放在哪里
 
 - 图片和 GIF 放进 `images/` 文件夹，在内容文件里写 `"images/文件名.jpg"`。
-- 简历 PDF 放在根目录，命名为 `resume.pdf`。
+- 简历 PDF 放在根目录，然后在 `site.js` 的 `resumes` 里加一行，例如 `{ label: "Game Design", file: "resume-game-design.pdf" }`。只有一份时按钮直接打开；有多份时点按钮会弹出菜单选择。上传前记得去掉电话号码。
 - 缩略图建议用 16:9 的比例，宽度 1280 像素左右。GIF 尽量控制在 5MB 以内。
 - **视频有两种放法**：
   - **短视频（5–20 秒、无声、循环播放）**：导出成 MP4 放进 `images/`，用 `clip`、`thumbVideo` 或正文里的 `clip` 模块。打开页面就自动播放，效果和 GIF 一样，但更清晰，文件也小得多。每个文件尽量控制在 10MB 以内，GitHub 单个文件上限是 100MB。
@@ -121,4 +121,4 @@ python -m http.server 8000
 - `site.js` 里的 `showDraftBanner` 改成 `false`。
 - 删掉所有示例项目。
 - 填好邮箱和 LinkedIn。
-- 放好 `resume.pdf`。
+- 放好简历 PDF（不含电话），并填进 `resumes`。

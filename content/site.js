@@ -20,7 +20,13 @@ window.SITE = {
     "strengthens everything I build.",
 
   // 联系方式。不想显示的项留空 ""，按钮就会自动隐藏。
-  resume: "resume.pdf", // 把简历 PDF 放到网站根目录，文件名保持一致
+  // 简历：PDF 放到网站根目录。只有一份时点按钮直接打开；多份时点按钮弹出菜单选择。
+  // 列表为空时，所有 Resume 按钮自动隐藏。
+  resumes: [
+    // { label: "Game Design", file: "resume-game-design.pdf" },
+    // { label: "Level Design", file: "resume-level-design.pdf" },
+    // { label: "Programming & Tech Design", file: "resume-programming.pdf" },
+  ],
   email: "jwyu0006@gmail.com",
   linkedin: "https://www.linkedin.com/in/jiawei-yu-4515043bb/",
   github: "https://github.com/JWYU0006",

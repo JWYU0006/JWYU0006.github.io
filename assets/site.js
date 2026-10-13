@@ -53,7 +53,7 @@ function renderChrome(onHome) {
     ${sectionLinks}
     ${hasMore ? `<a class="link" href="${base}#more">More Work</a>` : ""}
     <a class="link" href="${base}#about">About</a>
-    ${S.resume ? `<a class="cv" href="${esc(S.resume)}" target="_blank" rel="noopener">Resume</a>` : ""}
+    ${resumeButton("cv", "Resume")}
     <button class="theme-toggle" type="button" id="theme-toggle"></button>
   </div>`;
   wireTheme();
@@ -101,9 +101,21 @@ function tocNav(items) {
     .join("")}</ul></nav>`;
 }
 
+// One resume: a direct link. Several: a button that opens a menu, one entry per role.
+function resumeButton(cls, text) {
+  const list = (S.resumes || []).filter((r) => r && r.file);
+  if (!list.length) return "";
+  if (list.length === 1)
+    return `<a class="${cls}" href="${esc(list[0].file)}" target="_blank" rel="noopener">${esc(text)}</a>`;
+  return `<details class="cv-menu"><summary class="${cls}">${esc(text)} <span aria-hidden="true">▾</span></summary>
+    <div class="cv-pop"><span class="cv-pop-title">Choose a version</span>${list
+      .map((r) => `<a href="${esc(r.file)}" target="_blank" rel="noopener">${esc(r.label)}</a>`)
+      .join("")}</div></details>`;
+}
+
 function contactButtons() {
   const items = [
-    S.resume && `<a class="btn primary" href="${esc(S.resume)}" target="_blank" rel="noopener">Resume (PDF)</a>`,
+    resumeButton("btn primary", "Resume (PDF)"),
     S.linkedin && `<a class="btn" href="${esc(S.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>`,
     S.github && `<a class="btn" href="${esc(S.github)}" target="_blank" rel="noopener">GitHub</a>`,
     S.itch && `<a class="btn" href="${esc(S.itch)}" target="_blank" rel="noopener">itch.io</a>`,
@@ -390,6 +402,14 @@ function wireToc() {
 }
 
 function wire() {
+  // Close an open resume menu when clicking elsewhere or pressing Escape.
+  if (!window.__cvWired) {
+    window.__cvWired = true;
+    const closeAll = (except) =>
+      document.querySelectorAll("details.cv-menu[open]").forEach((d) => d !== except && d.removeAttribute("open"));
+    document.addEventListener("click", (e) => closeAll(e.target.closest("details.cv-menu")));
+    document.addEventListener("keydown", (e) => e.key === "Escape" && closeAll(null));
+  }
   // Hover GIF on thumbnails
   document.querySelectorAll("img[data-gif]").forEach((img) => {
     const host = img.closest("a") || img;
