@@ -18,6 +18,49 @@
 // =====================================================================
 window.PROJECTS = [
   // ---- 真实项目 ----
+  // Dentist Game：占位页面，内容和素材之后补。id 不要改，简历上的链接依赖它。
+  {
+    id: "dentist-game",
+    title: "Dentist Game",
+    category: "game",
+    featured: true,
+    summary: "A tense mouse-driven tooth extraction mechanic, designed and built in Blueprint during a design week.",
+    tags: ["UE5", "Blueprint", "Team of 5", "Design Week"],
+    meta: {
+      "My role": "Designer & developer",
+      Engine: "Unreal Engine 5",
+      Team: "5",
+      Duration: "Design week (2 days of development)",
+      Date: "Mar 2026",
+    },
+    github: "https://github.com/JWYU0006/Winter2026_Dentist",
+    highlights: [
+      "Designed the core mechanic: loosen, balance, then pull the tooth with the mouse",
+      "Built all gameplay and UI in Blueprint in two days of development",
+      "Tuned inertia, acceleration and tilt so the controls felt tense but fair",
+    ],
+    sections: [
+      {
+        type: "point",
+        heading: "Tooth extraction mechanic",
+        lead: "Three steps, all driven by the mouse.",
+        bullets: [
+          "Loosen the tooth with slow side-to-side movement.",
+          "Keep its random tilt upright.",
+          "Pull it out. Overshooting or tilting too far costs health.",
+        ],
+        mediaLabel: "loosening, balancing and pulling a tooth",
+      },
+      {
+        type: "point",
+        heading: "Tuning the feel",
+        lead: "Tense, but fair.",
+        bullets: ["Tuned the tooth's inertia, acceleration and tilt until the controls felt tense but fair."],
+        mediaLabel: "tuning comparison",
+      },
+    ],
+  },
+
   // Procedural Planet：占位页面，内容和素材之后补。id 不要改，简历上的链接依赖它。
   {
     id: "procedural-planet",
