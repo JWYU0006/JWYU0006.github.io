@@ -17,6 +17,47 @@
 //   sections  项目页正文，类型见 README.md
 // =====================================================================
 window.PROJECTS = [
+  // ---- 真实项目 ----
+  // Procedural Planet：占位页面，内容和素材之后补。id 不要改，简历上的链接依赖它。
+  {
+    id: "procedural-planet",
+    title: "Procedural Planet",
+    category: "code",
+    featured: true,
+    summary: "A procedural planet built in C++ with Unreal's Dynamic Mesh framework, with custom gravity for walking on the surface.",
+    tags: ["UE5", "C++", "Dynamic Mesh", "In progress"],
+    meta: {
+      "My role": "Programmer",
+      Engine: "Unreal Engine 5",
+      Language: "C++",
+      Duration: "Sep 2026 – present",
+      Status: "In progress",
+    },
+    github: "https://github.com/JWYU0006/Jiawei-Yu_AdvTop26",
+    highlights: [
+      "Runtime mesh generation with adjustable resolution",
+      "Generated collision on the planet surface",
+      "Custom gravity so the player can walk around the whole planet",
+    ],
+    sections: [
+      {
+        type: "point",
+        heading: "Runtime mesh generation",
+        lead: "The planet mesh is generated at runtime with Unreal's Dynamic Mesh framework.",
+        bullets: ["Resolution is adjustable."],
+        mediaLabel: "planet generating at different resolutions",
+      },
+      {
+        type: "point",
+        heading: "Collision and custom gravity",
+        lead: "The player can walk on any part of the planet's surface.",
+        bullets: ["Collision is generated for the mesh, and gravity pulls toward the planet instead of straight down."],
+        mediaLabel: "character walking around the planet",
+      },
+    ],
+  },
+
+  // ---- 以下是示例项目，上线前删除 ----
   {
     id: "rift-tactics",
     title: "Rift Tactics",
